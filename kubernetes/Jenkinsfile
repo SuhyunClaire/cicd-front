@@ -23,8 +23,11 @@ containerTemplate(name: 'kubectl', image: 'roffe/kubectl', command: 'cat', ttyEn
 		// Slack - 빌드 시작시
 
 		// #1 Github 소스 가져오기
-
-		// #2 Properties 파일 읽기		
+		stage('Get Source') {
+		git credentialsId: '{personal token for cicd}', url: '{https://github.com/SuhyunClaire/cicd-front}', branch: 'master'
+		}
+		// #2 Properties 파일 읽기	
+		def props = readProperties file:"{파일위치}"
 
 		// 재배포를 위한 tag를 재정의
 		def timeStamp = System.currentTimeMillis()
